@@ -17,9 +17,12 @@ namespace Axiom
 
 		~D3D11Device();
 
+		ID3D11Device4* GetDevice() const { return m_device; };
+		ID3D11DeviceContext4* GetDeviceContext() const { return m_deviceContext; };
+
 	private:
-		ID3D11Device4* m_device;
-		ID3D11DeviceContext4* m_deviceContext;
+		ID3D11Device4* m_device{ nullptr };
+		ID3D11DeviceContext4* m_deviceContext{ nullptr };
 	};
 }
 

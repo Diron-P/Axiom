@@ -16,7 +16,7 @@ protected:
 	virtual void OnUpdate() = 0;
 	virtual void OnRender() = 0;
 
-	Win32Window window;
+	WindowsWindow window;
 };
 
 #endif // !BASE_WIN32_APPLICATION_H

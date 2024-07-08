@@ -1,20 +1,20 @@
-#include "Win32Window.h"
+#include "WindowsWindow.h"
 
-Win32Window::Win32Window(HINSTANCE hInstance)
-	: mInstanceHandle{ hInstance }
+Axiom::WindowsWindow::WindowsWindow(HINSTANCE hInstance)
+	: m_instanceHandle{ hInstance }
 {
 	Initialize();
 }
 
-Win32Window::Win32Window(HINSTANCE hInstance, int width, int height) 
-	: mInstanceHandle{ hInstance }
-	, mWidth{ width }
-	, mHeight{ height }
+Axiom::WindowsWindow::WindowsWindow(const HINSTANCE hInstance, const int width, const int height) 
+	: m_instanceHandle{ hInstance }
+	, m_width{ width }
+	, m_height{ height }
 {
 	Initialize();
 }
 
-void Win32Window::Initialize()
+void Axiom::WindowsWindow::Initialize()
 {
 	// Register the window class.
 	const wchar_t CLASS_NAME[] = L"Spectra Window Class";
@@ -22,42 +22,42 @@ void Win32Window::Initialize()
 	WNDCLASS wc = { 0 };
 
 	wc.lpfnWndProc = WindowProc;
-	wc.hInstance = mInstanceHandle;
+	wc.hInstance = m_instanceHandle;
 	wc.lpszClassName = CLASS_NAME;
 
 	RegisterClass(&wc);
 
-	mWindowHandle = CreateWindowEx(
+	m_windowHandle = CreateWindowEx(
 		0,                              // Optional window styles.
 		CLASS_NAME,                     // Window class
 		L"Spectra Engine",                // Window text
 		WS_OVERLAPPEDWINDOW,            // Window style
 
 		// Size and position
-		CW_USEDEFAULT, CW_USEDEFAULT, mWidth, mHeight,
+		CW_USEDEFAULT, CW_USEDEFAULT, m_width, m_height,
 
 		NULL,       // Parent window    
 		NULL,       // Menu
-		mInstanceHandle, // Instance handle
+		m_instanceHandle, // Instance handle
 		this        // Additional application data
 	);
 
-	ShowWindow(mWindowHandle, 1);
+	ShowWindow(m_windowHandle, 1);
 }
 
-LRESULT Win32Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT Axiom::WindowsWindow::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	Win32Window* window;
+	WindowsWindow* window;
 	if (uMsg == WM_CREATE)
 	{
 		CREATESTRUCT* pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
-		window = reinterpret_cast<Win32Window*>(pCreate->lpCreateParams);
+		window = reinterpret_cast<WindowsWindow*>(pCreate->lpCreateParams);
 		SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)window);
 	}
 	else
 	{
 		LONG_PTR ptr = GetWindowLongPtr(hwnd, GWLP_USERDATA);
-		window = reinterpret_cast<Win32Window*>(ptr);
+		window = reinterpret_cast<WindowsWindow*>(ptr);
 	}
 
 	if (window)
@@ -70,15 +70,15 @@ LRESULT Win32Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	}
 }
 
-void Win32Window::HandleResize()
+void Axiom::WindowsWindow::HandleResize()
 {
 }
 
-void Win32Window::HandlePaint()
+void Axiom::WindowsWindow::HandlePaint()
 {
 }
 
-LRESULT Win32Window::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT Axiom::WindowsWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -95,7 +95,7 @@ LRESULT Win32Window::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 
 	default:
-		return DefWindowProc(mWindowHandle, uMsg, wParam, lParam);
+		return DefWindowProc(m_windowHandle, uMsg, wParam, lParam);
 	}
 
 	return TRUE;
