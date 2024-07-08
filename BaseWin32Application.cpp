@@ -1,18 +1,22 @@
 #include "BaseWin32Application.h"
 
-BaseWin32Application::BaseWin32Application(HINSTANCE hInstance)
-	: window{ hInstance }
+Axiom::BaseWindowsApplication::BaseWindowsApplication(HINSTANCE hInstance)
+	: window{ new WindowsWindow(hInstance) }
 {
 }
 
-BaseWin32Application::~BaseWin32Application()
+Axiom::BaseWindowsApplication::~BaseWindowsApplication()
 {
+	if (window)
+	{
+		delete window;
+	}
 }
 
-void BaseWin32Application::Run()
+void Axiom::BaseWindowsApplication::Run()
 {
 	MSG msg;
-	while (PeekMessage(&msg, window.GetHwnd(), 0, 0, PM_REMOVE))
+	while (PeekMessage(&msg, window->GetHwnd(), 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&msg);
 		DispatchMessageW(&msg);

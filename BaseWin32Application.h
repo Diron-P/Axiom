@@ -1,22 +1,25 @@
 #ifndef BASE_WIN32_APPLICATION_H
 #define BASE_WIN32_APPLICATION_H
 
-#include "Win32Window.h"
+#include "WindowsWindow.h"
 
-class BaseWin32Application
+namespace Axiom
 {
-public:
-	BaseWin32Application(HINSTANCE hInstance);
-	virtual ~BaseWin32Application();
+	class BaseWindowsApplication
+	{
+	public:
+		BaseWindowsApplication(HINSTANCE hInstance);
+		virtual ~BaseWindowsApplication();
 
-	void Run();
+		void Run();
 
-protected:
-	virtual void OnInit() = 0;
-	virtual void OnUpdate() = 0;
-	virtual void OnRender() = 0;
+	protected:
+		virtual void OnInit() = 0;
+		virtual void OnUpdate() = 0;
+		virtual void OnRender() = 0;
 
-	WindowsWindow window;
-};
+		WindowsWindow* window;
+	};
+}
 
 #endif // !BASE_WIN32_APPLICATION_H
