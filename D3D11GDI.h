@@ -1,0 +1,29 @@
+#ifndef D3D11_GDI_H
+#define D3D11_GDI_H
+
+#include "D3D11Device.h"
+#include "D3D11SwapChain.h"
+
+namespace Axiom
+{
+	class D3D11GDI
+	{
+	public:
+		D3D11GDI(const WindowsWindow* window);
+
+		void Initialize();
+		void Shutdown();
+
+		void Render();
+
+	private:
+		D3D11Device m_device;
+		D3D11SwapChain m_swapChain;
+		ID3D11RenderTargetView* m_rtv;
+		ID3D11Texture2D* m_depthStencilBuffer;
+		ID3D11DepthStencilState* m_depthStencilState;
+		ID3D11DepthStencilView* m_dsv;
+	};
+}
+
+#endif // !D3D11_GDI_H

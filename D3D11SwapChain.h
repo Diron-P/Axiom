@@ -20,6 +20,7 @@ namespace Axiom
 		~D3D11SwapChain();
 
 		void Present();
+		ID3D11Texture2D* GetBuffer(unsigned int index);
 
 		D3D11Device* m_device;
 		IDXGISwapChain4* m_swapChain;

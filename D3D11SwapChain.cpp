@@ -49,6 +49,9 @@ Axiom::D3D11SwapChain::D3D11SwapChain(D3D11Device* device, const WindowsWindow* 
 	}
 
 	swapChain->Release();
+	dxgiFactory->Release();
+	dxgiAdapter->Release();
+	dxgiDevice->Release();
 }
 
 Axiom::D3D11SwapChain::~D3D11SwapChain()
@@ -56,10 +59,18 @@ Axiom::D3D11SwapChain::~D3D11SwapChain()
 	if (m_swapChain)
 	{
 		m_swapChain->Release();
+		m_swapChain = nullptr;
 	}
 }
 
 void Axiom::D3D11SwapChain::Present()
 {
 	m_swapChain->Present(0, 0);
+}
+
+ID3D11Texture2D* Axiom::D3D11SwapChain::GetBuffer(const unsigned int index)
+{
+	ID3D11Texture2D* buffer = nullptr;
+	const HRESULT hr = m_swapChain->GetBuffer(index, IID_PPV_ARGS(&buffer));
+	return buffer;
 }

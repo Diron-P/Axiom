@@ -9,33 +9,33 @@ Axiom::D3D11Device::D3D11Device()
 	deviceFlags = D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-	IDXGIFactory2* dxgiFactory;
-	HRESULT hr = CreateDXGIFactory2(dxgiFlags, IID_PPV_ARGS(&dxgiFactory));
+	//IDXGIFactory2* dxgiFactory;
+	//HRESULT hr = CreateDXGIFactory2(dxgiFlags, IID_PPV_ARGS(&dxgiFactory));
 
-	if (FAILED(hr))
-	{
-		return;
-	}
+	//if (FAILED(hr))
+	//{
+	//	return;
+	//}
 
-	IDXGIAdapter1* adapter;
-    for (unsigned int i = 0; dxgiFactory->EnumAdapters1(i, &adapter) != DXGI_ERROR_NOT_FOUND; ++i)
-    {
-        DXGI_ADAPTER_DESC1 desc;
-        adapter->GetDesc1(&desc);
+	//IDXGIAdapter1* adapter;
+ //   for (unsigned int i = 0; dxgiFactory->EnumAdapters1(i, &adapter) != DXGI_ERROR_NOT_FOUND; ++i)
+ //   {
+ //       DXGI_ADAPTER_DESC1 desc;
+ //       adapter->GetDesc1(&desc);
 
-        // Skip the software adapter.
-        if (desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE)
-        {
-            continue;
-        }
+ //       // Skip the software adapter.
+ //       if (desc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE)
+ //       {
+ //           continue;
+ //       }
 
-        if (SUCCEEDED(D3D12CreateDevice(adapter, D3D_FEATURE_LEVEL_12_0, _uuidof(ID3D12Device), nullptr)))
-        {
-            break;
-        }
+ //       /*if (SUCCEEDED(D3D12CreateDevice(adapter, D3D_FEATURE_LEVEL_12_0, _uuidof(ID3D12Device), nullptr)))
+ //       {
+ //           break;
+ //       }*/
 
-        adapter->Release();
-    }
+ //       adapter->Release();
+ //   }
 
 	D3D_FEATURE_LEVEL featureLevels[] =
 	{
@@ -46,7 +46,7 @@ Axiom::D3D11Device::D3D11Device()
 	ID3D11DeviceContext* deviceContext;
 
 	// Create the device and the immediate context.
-	hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, deviceFlags, featureLevels,
+	HRESULT hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, deviceFlags, featureLevels,
 		1, D3D11_SDK_VERSION, &device, nullptr, &deviceContext);
 
 	if (SUCCEEDED(hr))
@@ -61,9 +61,15 @@ Axiom::D3D11Device::D3D11Device()
 
 Axiom::D3D11Device::~D3D11Device()
 {
-	if (m_device)
+	if (m_device != nullptr)
 	{
 		m_device->Release();
 		m_device = nullptr;
+	}
+
+	if (m_deviceContext != nullptr)
+	{
+		m_deviceContext->Release();
+		m_deviceContext = nullptr;
 	}
 }
