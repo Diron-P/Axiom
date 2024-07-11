@@ -137,6 +137,7 @@
     <ClCompile Include="D3D11Device.cpp" />
     <ClCompile Include="D3D11GDI.cpp" />
     <ClCompile Include="D3D11SwapChain.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestApp.cpp" />
     <ClCompile Include="WindowsWindow.cpp" />
@@ -147,8 +148,19 @@
     <ClInclude Include="D3D11Device.h" />
     <ClInclude Include="D3D11GDI.h" />
     <ClInclude Include="D3D11SwapChain.h" />
+    <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="MathFunctions.h" />
+    <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="Matrix4.h" />
+    <ClInclude Include="MatrixClipSpace.h" />
+    <ClInclude Include="MatrixTransform.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="RotationMatrix.h" />
     <ClInclude Include="TestApp.h" />
+    <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector4.h" />
     <ClInclude Include="WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>

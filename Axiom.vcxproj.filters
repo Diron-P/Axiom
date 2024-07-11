@@ -39,6 +39,9 @@
     <ClCompile Include="D3D11GDI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FileSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsWindow.h">
@@ -63,6 +66,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixClipSpace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MathFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
