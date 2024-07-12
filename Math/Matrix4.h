@@ -1,6 +1,7 @@
 #ifndef MATRIX4_H
 #define MATRIX4_H
 
+#include "Vector3.h"
 #include "Vector4.h"
 #include <stdint.h>
 #include <string.h>
