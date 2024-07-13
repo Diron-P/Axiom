@@ -6,6 +6,14 @@
 
 namespace Axiom
 {
+	enum class BufferType
+	{
+		VertexBuffer,
+		IndexBuffer,
+		ConstantBuffer,
+		StructuredBuffer
+	};
+
 	class D3D11GHI
 	{
 	public:
@@ -13,6 +21,8 @@ namespace Axiom
 
 		void Initialize();
 		void Shutdown();
+
+		void CreateBuffer(BufferType type, const void* data, unsigned int size);
 
 		void Render();
 

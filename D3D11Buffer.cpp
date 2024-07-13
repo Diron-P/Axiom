@@ -1,12 +1,12 @@
 #include "D3D11Buffer.h"
 
-Axiom::D3D11Buffer::D3D11Buffer(D3D11Device* device, D3D11_BIND_FLAG type, const bool isStaging)
+Axiom::D3D11Buffer::D3D11Buffer(D3D11Device* device, D3D11_BIND_FLAG type, const void* data, const unsigned int bufferSize, const bool isStaging)
 	: m_buffer{ nullptr }
 	, m_device{ device }
 {
 	D3D11_BUFFER_DESC desc = {};
 	desc.Usage = D3D11_USAGE_DEFAULT;
-	desc.ByteWidth = 0;
+	desc.ByteWidth = bufferSize;
 	desc.BindFlags = type;
 	desc.CPUAccessFlags = 0;
 	desc.MiscFlags = 0;
@@ -18,7 +18,7 @@ Axiom::D3D11Buffer::D3D11Buffer(D3D11Device* device, D3D11_BIND_FLAG type, const
 	}
 
 	D3D11_SUBRESOURCE_DATA initData = {};
-	initData.pSysMem = nullptr;
+	initData.pSysMem = data;
 
 	HRESULT hr = m_device->GetDevice()->CreateBuffer(&desc, &initData, &m_buffer);
 }

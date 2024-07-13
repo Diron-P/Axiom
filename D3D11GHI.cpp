@@ -1,5 +1,6 @@
 #include "D3D11GHI.h"
 #include "WindowsWindow.h"
+#include "D3D11Buffer.h"
 
 Axiom::D3D11GHI::D3D11GHI(const WindowsWindow* window)
 	: m_swapChain{ &m_device, window }
@@ -79,9 +80,27 @@ void Axiom::D3D11GHI::Shutdown()
 {
 }
 
+void Axiom::D3D11GHI::CreateBuffer(BufferType type, const void* data, const unsigned int size)
+{
+	D3D11_BIND_FLAG bindLocation;
+	switch (type)
+	{
+	case BufferType::IndexBuffer:
+		bindLocation = D3D11_BIND_INDEX_BUFFER;
+		break;
+	case BufferType::ConstantBuffer:
+		bindLocation = D3D11_BIND_CONSTANT_BUFFER;
+		break;
+	default:
+		bindLocation = D3D11_BIND_VERTEX_BUFFER;
+	};
+
+	D3D11Buffer* buffer = new D3D11Buffer(&m_device, bindLocation, data, size);
+}
+
 void Axiom::D3D11GHI::Render()
 {
-	float clearColor[4] = {1.0, 1.0, 0.0, 1.0};
+	float clearColor[4] = { 1.0, 1.0, 0.0, 1.0 };
 	m_device.GetDeviceContext()->ClearRenderTargetView(m_rtv, clearColor);
 	m_swapChain.Present();
 }
