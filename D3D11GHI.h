@@ -6,10 +6,10 @@
 
 namespace Axiom
 {
-	class D3D11GDI
+	class D3D11GHI
 	{
 	public:
-		D3D11GDI(const WindowsWindow* window);
+		D3D11GHI(const WindowsWindow* window);
 
 		void Initialize();
 		void Shutdown();

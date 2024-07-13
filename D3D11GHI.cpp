@@ -1,7 +1,7 @@
-#include "D3D11GDI.h"
+#include "D3D11GHI.h"
 #include "WindowsWindow.h"
 
-Axiom::D3D11GDI::D3D11GDI(const WindowsWindow* window)
+Axiom::D3D11GHI::D3D11GHI(const WindowsWindow* window)
 	: m_swapChain{ &m_device, window }
 {
 	ID3D11Texture2D* buffer = m_swapChain.GetBuffer(0);
@@ -71,15 +71,15 @@ Axiom::D3D11GDI::D3D11GDI(const WindowsWindow* window)
 	m_device.GetDeviceContext()->RSSetViewports(1, &vp);
 }
 
-void Axiom::D3D11GDI::Initialize()
+void Axiom::D3D11GHI::Initialize()
 {
 }
 
-void Axiom::D3D11GDI::Shutdown()
+void Axiom::D3D11GHI::Shutdown()
 {
 }
 
-void Axiom::D3D11GDI::Render()
+void Axiom::D3D11GHI::Render()
 {
 	float clearColor[4] = {1.0, 1.0, 0.0, 1.0};
 	m_device.GetDeviceContext()->ClearRenderTargetView(m_rtv, clearColor);
