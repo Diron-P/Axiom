@@ -95,7 +95,7 @@ void Axiom::D3D11GHI::CreateBuffer(BufferType type, const void* data, const unsi
 		bindLocation = D3D11_BIND_VERTEX_BUFFER;
 	};
 
-	D3D11Buffer* buffer = new D3D11Buffer(&m_device, bindLocation, data, size);
+	m_buffers.push_back(new D3D11Buffer(&m_device, bindLocation, data, size));
 }
 
 void Axiom::D3D11GHI::Render()

@@ -2,7 +2,7 @@
 #define TEST_APP
 
 #include "BaseWin32Application.h"
-#include "D3D11GDI.h"
+#include "D3D11GHI.h"
 
 namespace Axiom
 {
@@ -15,7 +15,7 @@ namespace Axiom
 		void OnUpdate() override;
 		void OnRender() override;
 
-		D3D11GDI gdi;
+		D3D11GHI gdi;
 	};
 }
 

@@ -3,6 +3,7 @@
 
 #include "D3D11Device.h"
 #include "D3D11SwapChain.h"
+#include <vector>
 
 namespace Axiom
 {
@@ -33,6 +34,7 @@ namespace Axiom
 		ID3D11Texture2D* m_depthStencilBuffer;
 		ID3D11DepthStencilState* m_depthStencilState;
 		ID3D11DepthStencilView* m_dsv;
+		std::vector<D3D11Buffer*>m_buffers;
 	};
 }
 
