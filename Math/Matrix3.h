@@ -3,9 +3,12 @@
 
 #include "Mappings.h"
 
-namespace Axiom {
-	namespace Math {
-		class Matrix3 {
+namespace Axiom
+{
+	namespace Math
+	{
+		class Matrix3
+		{
 		public:
 			float m[3][3];
 
@@ -95,7 +98,7 @@ namespace Axiom {
 				return *this;
 			}
 
-			inline Matrix3 operator*(const float& scalar) const
+			inline Matrix3 operator*(const float scalar) const
 			{
 				return Matrix3(
 					scalar * m[0][0], scalar * m[0][1], scalar * m[0][2],
@@ -160,13 +163,13 @@ namespace Axiom {
 
 			inline Matrix3 Inverse() const
 			{
-				float determinant = Determinant();
+				float det = Determinant();
 
-				if (determinant == 0.0f) {
+				if (det == 0.0f) {
 					//return Identity(); // Return an identity matrix if the current matrix is singular.
 				}
 
-				float inversedDet = 1.0f / determinant;
+				float inversedDet = 1.0f / det;
 
 				// Transposed inverse matrix
 				return Matrix3(
@@ -182,6 +185,6 @@ namespace Axiom {
 			}
 		};
 	} // end namespace Math
-} // end namespace Oblivion
+} // end namespace Axiom
 
 #endif

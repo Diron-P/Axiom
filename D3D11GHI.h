@@ -1,12 +1,15 @@
 #ifndef D3D11_GDI_H
 #define D3D11_GDI_H
 
+#include <vector>
+
 #include "D3D11Device.h"
 #include "D3D11SwapChain.h"
-#include <vector>
 
 namespace Axiom
 {
+	class D3D11Buffer;
+
 	enum class BufferType
 	{
 		VertexBuffer,
@@ -24,6 +27,7 @@ namespace Axiom
 		void Shutdown();
 
 		void CreateBuffer(BufferType type, const void* data, unsigned int size);
+		void CreateTexture();
 
 		void Render();
 

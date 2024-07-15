@@ -23,6 +23,9 @@ void Axiom::Camera::Update(float elapsedSeconds)
 	float moveInterval = m_moveSpeed * elapsedSeconds;
 	float rotateInterval = m_turnSpeed * elapsedSeconds;
 
+	m_pitch = Min(m_pitch, PIDIV4);
+    m_pitch = Max(-PIDIV4, m_pitch);
+
 	float x = move.x * -Cos(m_yaw) - move.z * Sin(m_yaw);
 	float z = move.x * Sin(m_yaw) - move.z * Cos(m_yaw);
 	m_position.x += x * moveInterval;

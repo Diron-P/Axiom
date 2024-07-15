@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseWin32Application.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="D3D11Buffer.cpp" />
     <ClCompile Include="D3D11Device.cpp" />
     <ClCompile Include="D3D11GHI.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="D3D11ShaderProgram.h" />
     <ClInclude Include="D3D11SwapChain.h" />
     <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="Math\Matrix2.h" />
     <ClInclude Include="Math\Matrix3.h" />
     <ClInclude Include="Math\MathFunctions.h" />
     <ClInclude Include="Math\MathUtils.h" />

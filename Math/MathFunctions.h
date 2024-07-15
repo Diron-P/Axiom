@@ -4,61 +4,62 @@
 #include <math.h>
 
 //PI defines
-#define PI 3.14159265359f 
+constexpr float PI = 3.14159265359f;
+constexpr float PIDIV4 = 0.785398163f;
 
 namespace Axiom
 {
 	namespace Math
 	{
 		//Trigonometric Functions
-		inline float Sin(float fValue)
+		inline float Sin(float value)
 		{
-			return sinf(fValue);
+			return sinf(value);
 		}
 
-		inline float Cos(float fValue)
+		inline float Cos(float value)
 		{
-			return cosf(fValue);
+			return cosf(value);
 		}
 
-		inline float Tan(float fValue)
+		inline float Tan(float value)
 		{
-			return tanf(fValue);
+			return tanf(value);
 		}
 
-		inline float ASin(float fValue)
+		inline float ASin(float value)
 		{
-			return asinf(fValue);
+			return asinf(value);
 		}
 
-		inline float ACos(float fValue)
+		inline float ACos(float value)
 		{
-			return acosf(fValue);
+			return acosf(value);
 		}
 
-		inline float ATan(float fValue)
+		inline float ATan(float value)
 		{
-			return atanf(fValue);
+			return atanf(value);
 		}
 
-		inline float Max(float fValueA, float fValueB)
+		inline float Max(float valueA, float valueB)
 		{
-			return (fValueA > fValueB) ? fValueA : fValueB;
+			return (valueA > valueB) ? valueA : valueB;
 		}
 
-		inline float Min(float fValueA, float fValueB)
+		inline float Min(float valueA, float valueB)
 		{
-			return (fValueA < fValueB) ? fValueA : fValueB;
+			return (valueA < valueB) ? valueA : valueB;
 		}
 
-		inline float DegToRad(float fValue)
+		inline float DegToRad(float value)
 		{
-			return (float)fValue * PI / 180.0f;
+			return (float)value * PI / 180.0f;
 		}
 
-		inline float RadToDeg(float fValue)
+		inline float RadToDeg(float value)
 		{
-			return (float)fValue * 180.0f / PI;
+			return (float)value * 180.0f / PI;
 		}
 	}
 }
