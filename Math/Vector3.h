@@ -30,6 +30,7 @@ namespace Axiom
 
 			Vector3& MakeZero();
 			float Magnitude();
+			void Set(float x, float y, float z);
 		};
 
 		class Vector4;
@@ -133,6 +134,13 @@ namespace Axiom
 		inline float Vector3::Magnitude()
 		{
 			return sqrtf((x * x) + (y * y) + (z * z));
+		}
+
+		inline void Vector3::Set(float x, float y, float z)
+		{
+			this->x = x;
+			this->y = y;
+			this->z = z;
 		}
 
 		/********************************************************************

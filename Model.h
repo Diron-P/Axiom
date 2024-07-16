@@ -3,13 +3,26 @@
 
 namespace Axiom
 {
+	namespace Math
+	{
+		class Vector3;
+	}
+
+	using namespace Math;
+
 	class Model
 	{
 	public:
+		Model();
+		Model(const char* fileName);
+		Model(unsigned int numVertices, unsigned int numIndices);
+		~Model();
 
 	private:
-		// vertices
-		// indices
+		unsigned int m_numVertices{ 0 };
+		unsigned int m_numIndices{ 0 };
+		Vector3* vertices{ nullptr };
+		unsigned int* indices{ nullptr };
 	};
 }
 
