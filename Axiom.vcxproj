@@ -143,6 +143,7 @@
     <ClCompile Include="D3D11GHI.cpp" />
     <ClCompile Include="D3D11ShaderProgram.cpp" />
     <ClCompile Include="D3D11SwapChain.cpp" />
+    <ClCompile Include="D3D11Texture.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="D3D11GHI.h" />
     <ClInclude Include="D3D11ShaderProgram.h" />
     <ClInclude Include="D3D11SwapChain.h" />
+    <ClInclude Include="D3D11Texture.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Math\Matrix2.h" />
     <ClInclude Include="Math\Matrix3.h" />

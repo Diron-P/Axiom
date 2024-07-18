@@ -32,6 +32,15 @@ Axiom::Model::Model(const char* fileName)
 			aiVector3D vertex = mesh->mVertices[i];
 			vertices[i].Set(vertex.x, vertex.y, vertex.z);
 		}
+
+		m_numIndices = 3 * mesh->mNumFaces;
+		indices = new unsigned int[m_numIndices];
+
+		for (int i = 0; i < mesh->mNumFaces; ++i)
+		{
+			aiFace face = mesh->mFaces[i];
+			memcpy(indices + i * 3, face.mIndices, sizeof(unsigned int) * face.mNumIndices);
+		}
 	}
 }
 
