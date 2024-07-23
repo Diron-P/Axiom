@@ -1,13 +1,10 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include "Math/Vector3.h"
+
 namespace Axiom
 {
-	namespace Math
-	{
-		class Vector3;
-	}
-
 	using namespace Math;
 
 	class Model

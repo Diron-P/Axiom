@@ -30,26 +30,24 @@ namespace Axiom
 
 			Vector3& MakeZero();
 			float Magnitude();
-			void Set(float x, float y, float z);
+			void Set(float inX, float inY, float inZ);
 		};
 
-		class Vector4;
-
-		Vector3::Vector3()
+		inline Vector3::Vector3()
 			: x(0.0f)
 			, y(0.0f)
 			, z(0.0f)
 		{
 		}
 
-		Vector3::Vector3(const float& x, const float& y, const float& z)
+		inline Vector3::Vector3(const float& x, const float& y, const float& z)
 			: x(x)
 			, y(y)
 			, z(z)
 		{
 		}
 
-		Vector3& operator+=(Vector3& v, const Vector3& v1)
+		inline Vector3& operator+=(Vector3& v, const Vector3& v1)
 		{
 			v.x += v1.x;
 			v.y += v1.y;
@@ -58,7 +56,7 @@ namespace Axiom
 			return v;
 		}
 
-		Vector3& operator-=(Vector3& v, const Vector3& v1)
+		inline Vector3& operator-=(Vector3& v, const Vector3& v1)
 		{
 			v.x -= v1.x;
 			v.y -= v1.y;
@@ -67,7 +65,7 @@ namespace Axiom
 			return v;
 		}
 
-		Vector3& operator*=(Vector3& v, const Vector3& v1)
+		inline Vector3& operator*=(Vector3& v, const Vector3& v1)
 		{
 			v.x *= v1.x;
 			v.y *= v1.y;
@@ -76,7 +74,7 @@ namespace Axiom
 			return v;
 		}
 
-		Vector3& operator/=(Vector3& v, const Vector3& v1)
+		inline Vector3& operator/=(Vector3& v, const Vector3& v1)
 		{
 			v.x /= v1.x;
 			v.y /= v1.y;
@@ -136,11 +134,11 @@ namespace Axiom
 			return sqrtf((x * x) + (y * y) + (z * z));
 		}
 
-		inline void Vector3::Set(float x, float y, float z)
+		inline void Vector3::Set(float inX, float inY, float inZ)
 		{
-			this->x = x;
-			this->y = y;
-			this->z = z;
+			x = inX;
+			y = inY;
+			z = inZ;
 		}
 
 		/********************************************************************

@@ -13,40 +13,40 @@ namespace Axiom
 			float x;
 			float y;
 
-			Vector2()
+			inline Vector2()
 				: x(0.0f)
 				, y(0.0f)
 			{
 			}
 
-			Vector2(const float& x, const float& y)
+			inline Vector2(const float& x, const float& y)
 				: x(x)
 				, y(y)
 			{
 			}
 
-			Vector2& operator+=(const Vector2& v)
+			inline Vector2& operator+=(const Vector2& v)
 			{
 				x += v.x;
 				y += v.y;
 				return *this;
 			}
 
-			Vector2& operator-=(const Vector2& v)
+			inline Vector2& operator-=(const Vector2& v)
 			{
 				x -= v.x;
 				y -= v.y;
 				return *this;
 			}
 
-			Vector2& operator*=(const Vector2& v)
+			inline Vector2& operator*=(const Vector2& v)
 			{
 				x *= v.x;
 				y *= v.y;
 				return *this;
 			}
 
-			Vector2& operator/=(const Vector2& v)
+			inline Vector2& operator/=(const Vector2& v)
 			{
 				x /= v.x;
 				y /= v.y;
@@ -90,7 +90,7 @@ namespace Axiom
 
 			inline float Magnitude() const
 			{
-				return sqrt((x * x) + (y * y));
+				return sqrtf((x * x) + (y * y));
 			}
 
 			inline float DotProduct(const Vector2& v1, const Vector2& v2)

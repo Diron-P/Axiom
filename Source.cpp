@@ -1,6 +1,5 @@
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h> 
+#ifndef SOURCE_H
+#define SOURCE_H
 
 #include "TestApp.h"
 #include "Model.h"
@@ -27,3 +26,5 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	return 0;
 }
+
+#endif
