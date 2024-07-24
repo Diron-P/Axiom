@@ -1,5 +1,6 @@
-#include "Mesh.h"
 #include "ModelImporter.h"
+#include "Mesh.h"
+#include "DDSReader.h"
 
 void Axiom::LoadModel(const char* fileName)
 {
@@ -33,39 +34,70 @@ void Axiom::ProcessNode(aiNode* node, const aiScene* scene, Mesh* meshes)
 	}
 }
 
-Axiom::Mesh* Axiom::ProcessMesh(aiMesh* assimpMesh, const aiScene* scene)
+Axiom::Mesh* Axiom::ProcessMesh(aiMesh* srcMesh, const aiScene* scene)
 {
-	Mesh* mesh = new Mesh();
-	mesh->m_numVertices = assimpMesh->mNumVertices;
-	mesh->m_vertices = (Vector3*)malloc(sizeof(Vector3) * mesh->m_numVertices);
+	Mesh* dstMesh = new Mesh();
+	dstMesh->m_numVertices = srcMesh->mNumVertices;
 
-	// Copy vertices.
-	if (mesh->m_vertices != nullptr)
+	dstMesh->m_vertices = (Vector3*)malloc(sizeof(Vector3) * dstMesh->m_numVertices);
+	dstMesh->m_normals = (Vector3*)malloc(sizeof(Vector3) * dstMesh->m_numVertices);
+	dstMesh->m_textureCoords = (Vector2*)malloc(sizeof(Vector2) * dstMesh->m_numVertices);
+
+	for (unsigned int i = 0; i < dstMesh->m_numVertices; ++i)
 	{
-		memcpy(mesh->m_vertices, assimpMesh->mVertices, sizeof(Vector3) * mesh->m_numVertices);
+		// Cache mesh attributes.
+		aiVector3D pos = srcMesh->mVertices[i];
+		aiVector3D norm = srcMesh->mNormals[i];
+		aiVector3D texCoord = srcMesh->mTextureCoords[0][i];
+
+		// Copy positions.
+		dstMesh->m_vertices[i].Set(pos.x, pos.y, pos.z);
+
+		// Copy normals.
+		dstMesh->m_normals[i].Set(norm.x, norm.y, norm.z);
+
+		// Copy texture coords.
+		dstMesh->m_textureCoords[i].Set(texCoord.x, texCoord.y);
 	}
 
 	// Copy indices.
-	mesh->m_numIndices = 3 * assimpMesh->mNumFaces;
-	mesh->m_indices = new unsigned int[mesh->m_numIndices];
+	dstMesh->m_numIndices = 3 * srcMesh->mNumFaces;
+	dstMesh->m_indices = new unsigned int[dstMesh->m_numIndices];
 
-	for (unsigned int i = 0; i < assimpMesh->mNumFaces; ++i)
+	for (unsigned int i = 0; i < srcMesh->mNumFaces; ++i)
 	{
-		aiFace face = assimpMesh->mFaces[i];
-		memcpy(mesh->m_indices + i * 3, face.mIndices, sizeof(unsigned int) * face.mNumIndices);
+		aiFace face = srcMesh->mFaces[i];
+		memcpy(dstMesh->m_indices + i * 3, face.mIndices, sizeof(unsigned int) * face.mNumIndices);
 	}
 
-	// Copy normals.
-	if (assimpMesh->mNormals != nullptr)
+	// Copy materials.
+
+	// Copy embedded textures.
+	if (scene->HasTextures())
 	{
-		mesh->m_normals = (Vector3*)malloc(sizeof(Vector3) * mesh->m_numVertices);
-		if (mesh->m_normals != nullptr)
+		for (unsigned int i = 0; i < scene->mNumTextures; ++i)
 		{
-			memcpy(mesh->m_normals, assimpMesh->mNormals, sizeof(Vector3) * mesh->m_numVertices);
+			aiTexture* texture = scene->mTextures[i];
+			if (texture->mHeight == 0)
+			{
+				// Compressed
+				if (texture->achFormatHint == "dds")
+				{
+					// Decode dds texture.
+					//DecodeHeader();
+				}
+
+				if (texture->achFormatHint == "jpg")
+				{
+					
+				}
+			}
+			else
+			{
+				// Uncompressed
+			}
 		}
 	}
 
-	// Copy UV coords.
-
-	return mesh;
+	return dstMesh;
 }

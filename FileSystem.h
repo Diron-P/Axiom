@@ -18,7 +18,8 @@ namespace Axiom
 		End
 	};
 
-	HANDLE Open(char* filename, OpenMode mode) noexcept;
+	HANDLE Open(const char* fileName, OpenMode mode) noexcept;
+	void Close(HANDLE fh);
 	void Read(HANDLE fh, void* const buffer, const DWORD size) noexcept;
 	void Seek(HANDLE fh, int offset, Position location) noexcept;
 	unsigned long GetFileSize(HANDLE fh);

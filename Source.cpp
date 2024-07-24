@@ -2,7 +2,8 @@
 #define SOURCE_H
 
 #include "TestApp.h"
-#include "Model.h"
+//#include "Model.h"
+#include "DDSReader.h"
 
 using namespace Axiom;
 
@@ -22,7 +23,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	//	aiProcess_JoinIdenticalVertices |
 	//	aiProcess_SortByPType);
 
-	Model model("E:\\Dev\\Axiom\\DamagedHelmet.glb");
+	//Model model("E:\\Dev\\Axiom\\DamagedHelmet.glb");
+
+	DDSTextureUtils::LoadDDSTextureFromFile("E:\\Dev\\Axiom\\test.dds");
 
 	return 0;
 }

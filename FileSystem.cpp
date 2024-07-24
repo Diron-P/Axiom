@@ -1,8 +1,8 @@
 #include "FileSystem.h"
 
-HANDLE Axiom::Open(char* filename, OpenMode mode) noexcept
+HANDLE Axiom::Open(const char* fileName, OpenMode mode) noexcept
 {
-	if (filename == nullptr)
+	if (fileName == nullptr)
 	{
 		return nullptr;
 	}
@@ -20,7 +20,7 @@ HANDLE Axiom::Open(char* filename, OpenMode mode) noexcept
 		desiredAccess = GENERIC_READ;
 	}
 
-	HANDLE fh = CreateFileA(filename, desiredAccess, 0, nullptr, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+	HANDLE fh = CreateFileA(fileName, desiredAccess, 0, nullptr, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
 
 	if (fh == INVALID_HANDLE_VALUE)
 	{
@@ -28,6 +28,11 @@ HANDLE Axiom::Open(char* filename, OpenMode mode) noexcept
 	}
 
 	return fh;
+}
+
+void Axiom::Close(HANDLE fh)
+{
+	CloseHandle(fh);
 }
 
 void Axiom::Read(HANDLE fh, void* const buffer, const DWORD size) noexcept
@@ -38,7 +43,7 @@ void Axiom::Read(HANDLE fh, void* const buffer, const DWORD size) noexcept
 	}
 
 	DWORD numBytesRead = 0ul;
-	ReadFile(fh, buffer, size, &numBytesRead, nullptr);
+	bool res = ReadFile(fh, buffer, size, &numBytesRead, nullptr);
 }
 
 void Axiom::Seek(HANDLE fh, int offset, Position location) noexcept

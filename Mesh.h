@@ -12,6 +12,7 @@ namespace Axiom
 	{
 	public:
 		Mesh();
+		//Mesh(unsigned int numVertices, unsigned int numIndices);
 		~Mesh();
 
 		unsigned int m_numVertices{ 0 };

@@ -144,10 +144,12 @@
     <ClCompile Include="D3D11ShaderProgram.cpp" />
     <ClCompile Include="D3D11SwapChain.cpp" />
     <ClCompile Include="D3D11Texture.cpp" />
+    <ClCompile Include="DDSReader.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelImporter.cpp" />
+    <ClCompile Include="RendererCommon.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestApp.cpp" />
     <ClCompile Include="WindowsWindow.cpp" />
@@ -160,6 +162,7 @@
     <ClInclude Include="D3D11ShaderProgram.h" />
     <ClInclude Include="D3D11SwapChain.h" />
     <ClInclude Include="D3D11Texture.h" />
+    <ClInclude Include="DDSReader.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Math\Matrix2.h" />
     <ClInclude Include="Math\Matrix3.h" />
