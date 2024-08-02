@@ -1,5 +1,6 @@
 #include <wincodec.h>
-#include "WICTextureLoader.h"
+#include "ImageUtils.h"
+#include "RendererCommon.h"
 
 constexpr auto FORMAT_MAPPINGS_SIZE = 17;
 constexpr auto FORMAT_CONVERSIONS_SIZE = 41;
@@ -129,11 +130,11 @@ static WICPixelFormatGUID GetWICTargetPixelFormat(const WICPixelFormatGUID& form
 	return GUID_WICPixelFormatUndefined;
 }
 
-void Axiom::LoadTextureFromFilename(const wchar_t* filename)
+Texture* ImageUtils::LoadWICTextureFromFilename(const wchar_t* filename)
 {
 	if (filename == nullptr)
 	{
-		return;
+		return nullptr;
 	}
 
 	// Initialize COM on the current thread.
@@ -150,7 +151,7 @@ void Axiom::LoadTextureFromFilename(const wchar_t* filename)
 
 	if (FAILED(hr))
 	{
-		return;
+		return nullptr;
 	}
 
 	unsigned int numFrames = 0;
@@ -158,7 +159,7 @@ void Axiom::LoadTextureFromFilename(const wchar_t* filename)
 
 	if (FAILED(hr))
 	{
-		return;
+		return nullptr;
 	}
 
 	// We, currently, do not support image formats with multiple frames.
@@ -167,7 +168,7 @@ void Axiom::LoadTextureFromFilename(const wchar_t* filename)
 		decoder->Release();
 		factory->Release();
 
-		return;
+		return nullptr;
 	}
 
 	// IWICBitmapFrameDecode represents a bitmap source and is used to access the actual bitmap data of an image format.
@@ -176,7 +177,7 @@ void Axiom::LoadTextureFromFilename(const wchar_t* filename)
 
 	if (FAILED(hr))
 	{
-		return;
+		return nullptr;
 	}
 
 	unsigned int width = 0;
@@ -199,7 +200,7 @@ void Axiom::LoadTextureFromFilename(const wchar_t* filename)
 		if (dxgiFormat == DXGI_FORMAT_UNKNOWN)
 		{
 			// Unsupported format.
-			return;
+			return nullptr;
 		}
 
 		IWICFormatConverter* formatConverter;
@@ -224,17 +225,32 @@ void Axiom::LoadTextureFromFilename(const wchar_t* filename)
 
 	hr = frame->CopyPixels(nullptr, pitch, imageSize, buffer);
 
+	SubResourceData* subResources = new SubResourceData();
+	subResources->initData = buffer;
+	subResources->memPitch = pitch;
+	subResources->memSlicePitch = 0;
 
+	Texture* texture = new Texture(width, height, 0, 1, 1, TextureType::Texture2D, subResources);
+
+	// TODO: Autogen mipmaps
+
+	pixelInfo->Release();
+	componentInfo->Release();
+	frame->Release();
+	decoder->Release();
+	factory->Release();
 
 	// Uninitialize COM.
 	CoUninitialize();
+
+	return texture;
 }
 
-void Axiom::LoadTextureFromStream(const void* buffer, unsigned int size)
+Texture* ImageUtils::LoadWICTextureFromStream(void* data, unsigned int size)
 {
-	if (buffer == nullptr || size == 0)
+	if (data == nullptr || size == 0)
 	{
-		return;
+		return nullptr;
 	}
 
 	HRESULT hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
@@ -243,4 +259,113 @@ void Axiom::LoadTextureFromStream(const void* buffer, unsigned int size)
 
 	// Create the imaging factory.
 	hr = CoCreateInstance(CLSID_WICImagingFactory, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&factory));
+
+	IWICStream* stream;
+	hr = factory->CreateStream(&stream);
+	if (FAILED(hr))
+	{
+		CoUninitialize();
+		return nullptr;
+	}
+
+	hr = stream->InitializeFromMemory(reinterpret_cast<WICInProcPointer>(data), size);
+
+	IWICBitmapDecoder* decoder = nullptr;
+
+	// Create the decoder from filename.
+	hr = factory->CreateDecoderFromStream(stream, nullptr, WICDecodeMetadataCacheOnDemand, &decoder);
+
+	if (FAILED(hr))
+	{
+		return nullptr;
+	}
+
+	unsigned int numFrames = 0;
+	hr = decoder->GetFrameCount(&numFrames);
+
+	if (FAILED(hr))
+	{
+		return nullptr;
+	}
+
+	// We, currently, do not support image formats with multiple frames.
+	if (numFrames > 1)
+	{
+		decoder->Release();
+		factory->Release();
+
+		return nullptr;
+	}
+
+	// IWICBitmapFrameDecode represents a bitmap source and is used to access the actual bitmap data of an image format.
+	IWICBitmapFrameDecode* frame = nullptr;
+	hr = decoder->GetFrame(0, &frame);
+
+	if (FAILED(hr))
+	{
+		return nullptr;
+	}
+
+	unsigned int width = 0;
+	unsigned int height = 0;
+
+	// Retrieve the pixel width and height of the bitmap.
+	hr = frame->GetSize(&width, &height);
+
+	WICPixelFormatGUID wicFormat;
+	hr = frame->GetPixelFormat(&wicFormat);
+
+	DXGI_FORMAT dxgiFormat = GetDXGIFormat(wicFormat);
+
+	if (dxgiFormat == DXGI_FORMAT_UNKNOWN)
+	{
+		// Let's see if we can convert the unsupported format to one of the supported pixel formats.
+		wicFormat = GetWICTargetPixelFormat(wicFormat);
+		dxgiFormat = GetDXGIFormat(wicFormat);
+
+		if (dxgiFormat == DXGI_FORMAT_UNKNOWN)
+		{
+			// Unsupported format.
+			return nullptr;
+		}
+
+		IWICFormatConverter* formatConverter;
+		hr = factory->CreateFormatConverter(&formatConverter);
+
+		hr = formatConverter->Initialize(frame, wicFormat, WICBitmapDitherTypeErrorDiffusion, 0, 0, WICBitmapPaletteTypeCustom);
+		formatConverter->Release();
+	}
+
+	IWICComponentInfo* componentInfo;
+	hr = factory->CreateComponentInfo(wicFormat, &componentInfo);
+
+	IWICPixelFormatInfo* pixelInfo;
+	hr = componentInfo->QueryInterface(&pixelInfo);
+
+	unsigned int bpp = 0;
+	hr = pixelInfo->GetBitsPerPixel(&bpp);
+
+	unsigned int pitch = (width * bpp + 7) / 8;
+	unsigned int imageSize = pitch * height;
+	unsigned char* buffer = new unsigned char[imageSize];
+
+	hr = frame->CopyPixels(nullptr, pitch, imageSize, buffer);
+
+	SubResourceData* subResources = new SubResourceData();
+	subResources->initData = buffer;
+	subResources->memPitch = pitch;
+	subResources->memSlicePitch = 0;
+
+	Texture* texture = new Texture(width, height, 0, 1, 1, TextureType::Texture2D, subResources);
+
+	pixelInfo->Release();
+	componentInfo->Release();
+	frame->Release();
+	decoder->Release();
+	factory->Release();
+
+	// Uninitialize COM.
+	CoUninitialize();
+
+	return texture;
 }

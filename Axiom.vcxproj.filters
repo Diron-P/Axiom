@@ -149,7 +149,7 @@
     <ClInclude Include="DDSReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WICTextureLoader.h">
+    <ClInclude Include="ImageUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

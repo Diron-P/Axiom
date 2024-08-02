@@ -4,8 +4,9 @@
 #include <vector>
 #include "TestApp.h"
 //#include "Model.h"
+#include "ModelImporter.h"
 #include "DDSReader.h"
-#include "WICTextureLoader.h"
+#include "ImageUtils.h"
 
 using namespace Axiom;
 using namespace std;
@@ -28,7 +29,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	//Model model("E:\\Dev\\Axiom\\DamagedHelmet.glb");
 
-	Axiom::LoadTextureFromFilename(L"E:\\Dev\\Axiom\\1353436.png");
+	Axiom::LoadModel("E:\\Dev\\Axiom\\DamagedHelmet.glb");
+
+	//Axiom::LoadTextureFromFilename(L"E:\\Dev\\Axiom\\1353436.png");
 	
 	return 0;
 }

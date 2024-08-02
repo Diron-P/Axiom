@@ -1,8 +1,13 @@
 #include <stdint.h>
 #include <dxgiformat.h>
-#include "DDSReader.h"
+#include "ImageUtils.h"
 #include "FileSystem.h"
 #include "RendererCommon.h"
+
+#define MAKEFOURCC(ch0, ch1, ch2, ch3) \
+((unsigned int) ch3 << 24 | (unsigned int) ch2 << 16 | (unsigned int) ch1 << 8 | (unsigned int) ch0)
+
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 constexpr unsigned int DDS_MAGIC_NUMBER = 0x20534444;
 
@@ -396,7 +401,7 @@ static void GetInitData(DDSHeader& header, uint32_t numTextures, SubResourceData
 	}
 }
 
-Texture* DDSTextureUtils::LoadDDSTextureFromFile(const char* fileName)
+Texture* ImageUtils::LoadDDSTextureFromFile(const char* fileName)
 {
 	HANDLE fileHandle = Axiom::Open(fileName, Axiom::OpenMode::Read);
 	const unsigned long fileSize = Axiom::GetFileSize(fileHandle);

@@ -6,9 +6,6 @@
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
-struct DDSHeader;
-struct DDSHeaderDX10;
-struct DDSPixelFormat;
 class Texture;
 
 namespace DDSTextureUtils

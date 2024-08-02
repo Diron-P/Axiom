@@ -20,6 +20,11 @@ struct TextureDesc
 
 struct SubResourceData
 {
+	~SubResourceData()
+	{
+		delete[] initData;
+	}
+
 	void* initData;
 	unsigned int memPitch;
 	unsigned int memSlicePitch;

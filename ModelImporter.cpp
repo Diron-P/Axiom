@@ -1,6 +1,7 @@
 #include "ModelImporter.h"
 #include "Mesh.h"
 #include "DDSReader.h"
+#include "ImageUtils.h"
 
 void Axiom::LoadModel(const char* fileName)
 {
@@ -87,9 +88,9 @@ Axiom::Mesh* Axiom::ProcessMesh(aiMesh* srcMesh, const aiScene* scene)
 					//DecodeHeader();
 				}
 
-				if (texture->achFormatHint == "jpg")
+				if (texture->CheckFormat("jpg"))
 				{
-					
+					ImageUtils::LoadWICTextureFromStream(texture->pcData, texture->mWidth);
 				}
 			}
 			else
