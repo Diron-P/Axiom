@@ -1,10 +1,10 @@
 #include "RendererCommon.h"
 
-Texture::Texture()
+Image::Image()
 {
 }
 
-Texture::Texture(unsigned int width, unsigned int height, unsigned int depth, unsigned int mipLevels, unsigned int arraySize, TextureType type, SubResourceData* subResources)
+Image::Image(unsigned int width, unsigned int height, unsigned int depth, unsigned int mipLevels, unsigned int arraySize, TextureType type, SubResourceData* subResources)
 	: m_width{ width }
 	, m_height{ height }
 	, m_depth{ depth }
@@ -16,17 +16,17 @@ Texture::Texture(unsigned int width, unsigned int height, unsigned int depth, un
 {
 }
 
-Texture::~Texture()
+Image::~Image()
 {
 	delete[] m_subResources;
 }
 
-SubResourceData* Texture::GetSubResources() const
+SubResourceData* Image::GetSubResources() const
 {
 	return m_subResources;
 }
 
-void Texture::SetProperties(unsigned int width, unsigned int height, unsigned int depth, unsigned int mipLevels, unsigned int arraySize, TextureType type)
+void Image::SetProperties(unsigned int width, unsigned int height, unsigned int depth, unsigned int mipLevels, unsigned int arraySize, TextureType type)
 {
 	m_width = width;
 	m_height = height;

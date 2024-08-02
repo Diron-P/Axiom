@@ -401,7 +401,7 @@ static void GetInitData(DDSHeader& header, uint32_t numTextures, SubResourceData
 	}
 }
 
-Texture* ImageUtils::LoadDDSTextureFromFile(const char* fileName)
+Image* ImageUtils::LoadDDSTextureFromFile(const char* fileName)
 {
 	HANDLE fileHandle = Axiom::Open(fileName, Axiom::OpenMode::Read);
 	const unsigned long fileSize = Axiom::GetFileSize(fileHandle);
@@ -412,7 +412,7 @@ Texture* ImageUtils::LoadDDSTextureFromFile(const char* fileName)
 	DDSHeader* header = nullptr;
 	DDSHeaderDX10* dx10Header = nullptr;
 	uint8_t* surfaceData = nullptr;
-	Texture* texture = nullptr;
+	Image* texture = nullptr;
 
 	if (DecodeHeader(buffer, fileSize, &header, &dx10Header, &surfaceData))
 	{
@@ -426,7 +426,7 @@ Texture* ImageUtils::LoadDDSTextureFromFile(const char* fileName)
 		SubResourceData* subResources = new SubResourceData[numTextures * header->mipMapCount];
 		GetInitData(*header, numTextures, subResources, surfaceData, GetDXGIFormat(header->ddspf));
 
-		texture = new Texture(header->width, header->height, header->depth, header->mipMapCount, numTextures, TextureType::Texture2D, subResources);
+		texture = new Image(header->width, header->height, header->depth, header->mipMapCount, numTextures, TextureType::Texture2D, subResources);
 	};
 
 	Axiom::Close(fileHandle);

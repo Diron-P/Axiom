@@ -6,11 +6,11 @@
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
-class Texture;
+class Image;
 
 namespace DDSTextureUtils
 {
-	Texture* LoadDDSTextureFromFile(const char* fileName);
+	Image* LoadDDSTextureFromFile(const char* fileName);
 }
 
 #endif

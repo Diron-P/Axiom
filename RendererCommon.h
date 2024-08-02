@@ -30,13 +30,13 @@ struct SubResourceData
 	unsigned int memSlicePitch;
 };
 
-class Texture
+class Image
 {
 public:
-	Texture();
-	Texture(unsigned int width, unsigned int height, unsigned int depth, unsigned int mipLevels, unsigned int arraySize, TextureType type, SubResourceData* subResources);
+	Image();
+	Image(unsigned int width, unsigned int height, unsigned int depth, unsigned int mipLevels, unsigned int arraySize, TextureType type, SubResourceData* subResources);
 
-	~Texture();
+	~Image();
 
 	SubResourceData* GetSubResources() const;
 	void SetProperties(unsigned int width, unsigned int height, unsigned int depth, unsigned int mipLevels, unsigned int arraySize, TextureType type);
