@@ -1,11 +1,14 @@
 #ifndef SOURCE_H
 #define SOURCE_H
 
+#include <vector>
 #include "TestApp.h"
 //#include "Model.h"
 #include "DDSReader.h"
+#include "WICTextureLoader.h"
 
 using namespace Axiom;
+using namespace std;
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
@@ -25,8 +28,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	//Model model("E:\\Dev\\Axiom\\DamagedHelmet.glb");
 
-	DDSTextureUtils::LoadDDSTextureFromFile("E:\\Dev\\Axiom\\test.dds");
-
+	Axiom::LoadTextureFromFilename(L"E:\\Dev\\Axiom\\1353436.png");
+	
 	return 0;
 }
 
