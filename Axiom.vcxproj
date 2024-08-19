@@ -76,6 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <ExceptionHandling>false</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -107,6 +108,8 @@
       <TreatWarningAsError>false</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>E:\Dev\Axiom\Libs\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <ExceptionHandling>false</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -126,6 +129,7 @@
       <TreatWarningAsError>false</TreatWarningAsError>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>E:\Dev\Axiom\Libs\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>false</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,6 +150,7 @@
     <ClCompile Include="D3D11Texture.cpp" />
     <ClCompile Include="DDSReader.cpp" />
     <ClCompile Include="FileSystem.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelImporter.cpp" />
@@ -158,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWin32Application.h" />
+    <ClInclude Include="ConsoleLogHandler.h" />
     <ClInclude Include="D3D11Buffer.h" />
     <ClInclude Include="D3D11Device.h" />
     <ClInclude Include="D3D11GHI.h" />
@@ -166,6 +172,7 @@
     <ClInclude Include="D3D11Texture.h" />
     <ClInclude Include="DDSReader.h" />
     <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Math\Matrix2.h" />
     <ClInclude Include="Math\Matrix3.h" />
     <ClInclude Include="Math\MathFunctions.h" />
@@ -176,6 +183,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelImporter.h" />
+    <ClInclude Include="Platform.h" />
     <ClInclude Include="RefCountPtr.h" />
     <ClInclude Include="RendererCommon.h" />
     <ClInclude Include="TestApp.h" />
@@ -183,6 +191,7 @@
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="ImageUtils.h" />
+    <ClInclude Include="Vector.h" />
     <ClInclude Include="WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>

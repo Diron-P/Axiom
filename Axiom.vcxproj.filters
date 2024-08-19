@@ -75,6 +75,9 @@
     <ClCompile Include="RefCountPtr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsWindow.h">
@@ -156,6 +159,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RefCountPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleLogHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
