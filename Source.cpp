@@ -7,7 +7,9 @@
 //#include "ModelImporter.h"
 //#include "DDSReader.h"
 //#include "ImageUtils.h"
-#include "Logger.h"
+//#include "Logger.h"
+
+#include "D3D11Device.h"
 
 using namespace Axiom;
 using namespace std;
@@ -34,8 +36,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	//Axiom::LoadTextureFromFilename(L"E:\\Dev\\Axiom\\1353436.png");
 
-	Logger logger = Logger::Get();
-	logger.LogFatal("FATAL --> Test message %d %d \n", 32, 43);
+	D3D11Device device;
 	
 	return 0;
 }

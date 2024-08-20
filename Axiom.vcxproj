@@ -170,6 +170,7 @@
     <ClInclude Include="D3D11ShaderProgram.h" />
     <ClInclude Include="D3D11SwapChain.h" />
     <ClInclude Include="D3D11Texture.h" />
+    <ClInclude Include="D3DAdapter.h" />
     <ClInclude Include="DDSReader.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Logger.h" />
