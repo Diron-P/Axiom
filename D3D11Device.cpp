@@ -4,6 +4,7 @@ Axiom::D3D11Device::D3D11Device()
 {
 	unsigned int dxgiFlags = 0;
 	D3D11_CREATE_DEVICE_FLAG deviceFlags;
+
 #ifdef _DEBUG
 	dxgiFlags = DXGI_CREATE_FACTORY_DEBUG;
 	deviceFlags = D3D11_CREATE_DEVICE_DEBUG;
@@ -37,9 +38,12 @@ Axiom::D3D11Device::D3D11Device()
  //       adapter->Release();
  //   }
 
+	// D3D_FEATURE_LEVEL_12_1 and D3D_FEATURE_LEVEL_12_0 require Direct3D 11.3 or Direct3D 12 runtime.
+	// Support for these levels will be added in the future.
 	D3D_FEATURE_LEVEL featureLevels[] =
-	{
-		D3D_FEATURE_LEVEL_11_1
+	{		
+		D3D_FEATURE_LEVEL_11_1,
+		D3D_FEATURE_LEVEL_11_0
 	};
 
 	ID3D11Device* device;
@@ -47,7 +51,7 @@ Axiom::D3D11Device::D3D11Device()
 
 	// Create the device and the immediate context.
 	HRESULT hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, deviceFlags, featureLevels,
-		1, D3D11_SDK_VERSION, &device, nullptr, &deviceContext);
+		sizeof(featureLevels) / sizeof(D3D_FEATURE_LEVEL), D3D11_SDK_VERSION, &device, nullptr, &deviceContext);
 
 	if (SUCCEEDED(hr))
 	{
