@@ -1,4 +1,6 @@
 #include "D3D11Device.h"
+#include "RefCountPtr.h"
+#include <wrl/client.h>
 
 Axiom::D3D11Device::D3D11Device()
 {
@@ -28,8 +30,8 @@ Axiom::D3D11Device::D3D11Device()
 		D3D_FEATURE_LEVEL_9_1,
 	};
 
-	IDXGIAdapter1* adapter;
-    for (unsigned int i = 1; dxgiFactory->EnumAdapters1(i, &adapter) != DXGI_ERROR_NOT_FOUND; ++i)
+	RefCountPtr<IDXGIAdapter1> adapter;
+    for (unsigned int i = 0; dxgiFactory->EnumAdapters1(i, &adapter) != DXGI_ERROR_NOT_FOUND; ++i)
     {
         DXGI_ADAPTER_DESC1 desc;
         adapter->GetDesc1(&desc);
@@ -45,11 +47,12 @@ Axiom::D3D11Device::D3D11Device()
 		// If the GPU does not support the requested feature level, but the required runtimes are present, 
 		// the system will create a device for the highest feature level supported by the GPU from the list provided.
 
-		HRESULT hr = D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0, featureLevels, sizeof(featureLevels) / sizeof(D3D_FEATURE_LEVEL), D3D11_SDK_VERSION, nullptr, &supportedLevel, nullptr);
+		hr = D3D11CreateDevice(adapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0, featureLevels, sizeof(featureLevels) / sizeof(D3D_FEATURE_LEVEL), D3D11_SDK_VERSION, nullptr, &supportedLevel, nullptr);
+
+		// If Direct3D 11.1 runtime is not installed, recreate the device using the next available feature level.
         if (hr == E_INVALIDARG)
         {
-			// If Direct3D 11.1 runtime is not installed, recreate the device using the next available feature level.
-            hr = D3D11CreateDevice(adapter, D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0, featureLevels + 1, (sizeof(featureLevels) / sizeof(D3D_FEATURE_LEVEL)) - 1, D3D11_SDK_VERSION, nullptr, &supportedLevel, nullptr);
+            hr = D3D11CreateDevice(adapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0, featureLevels + 1, (sizeof(featureLevels) / sizeof(D3D_FEATURE_LEVEL)) - 1, D3D11_SDK_VERSION, nullptr, &supportedLevel, nullptr);
         }
 
 		if(SUCCEEDED(hr))
@@ -57,29 +60,28 @@ Axiom::D3D11Device::D3D11Device()
 			// Succeded
 			break;
 		}
-		{
-			// The device doesn't support requested feature levels.
-			// TODO
-		}
-
-        adapter->Release();
     }	
 
-	ID3D11Device* device;
-	ID3D11DeviceContext* deviceContext;
+	RefCountPtr<ID3D11Device> device;
+	RefCountPtr<ID3D11DeviceContext> deviceContext;
 
 	// Create the device and the immediate context.
-	hr = D3D11CreateDevice(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, deviceFlags, featureLevels,
+	hr = D3D11CreateDevice(adapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, deviceFlags, featureLevels,
 		sizeof(featureLevels) / sizeof(D3D_FEATURE_LEVEL), D3D11_SDK_VERSION, &device, nullptr, &deviceContext);
+
+	RefCountPtr<ID3D11Device4> device4;
+	RefCountPtr<ID3D11DeviceContext4> deviceCtx4;	
 
 	if (SUCCEEDED(hr))
 	{
-		device->QueryInterface(IID_PPV_ARGS(&m_device));
-		deviceContext->QueryInterface(IID_PPV_ARGS(&m_deviceContext));
-	}
+		device.As(device4);
+		deviceContext.As(deviceCtx4);
+		/*device->QueryInterface(IID_PPV_ARGS(&m_device));
+		deviceContext->QueryInterface(IID_PPV_ARGS(&m_deviceContext));*/
 
-	device->Release();
-	deviceContext->Release();
+		/*m_deviceContext->Release();
+		m_device->Release();*/
+	}
 }
 
 Axiom::D3D11Device::~D3D11Device()
