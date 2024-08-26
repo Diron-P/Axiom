@@ -48,6 +48,9 @@
     <ClCompile Include="D3D11GDI-D3D11Device.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D3D11SwapChain.ixx">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsWindow.h">

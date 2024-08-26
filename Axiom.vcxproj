@@ -154,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWin32Application.h" />
+    <ClCompile Include="D3D11SwapChain.ixx">
+      <FileType>Document</FileType>
+    </ClCompile>
     <ClInclude Include="Math\Matrix2.h" />
     <ClInclude Include="Math\Matrix3.h" />
     <ClInclude Include="Math\MathFunctions.h" />

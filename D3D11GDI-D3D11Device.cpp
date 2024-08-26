@@ -17,7 +17,7 @@ Axiom::D3D11Device::D3D11Device()
 	deviceFlags = D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-	IDXGIFactory1* dxgiFactory;
+	IDXGIFactory2* dxgiFactory;
 	HRESULT hr = CreateDXGIFactory1(IID_PPV_ARGS(&dxgiFactory));
 
 	// D3D11_SDK supports D3D_FEATURE_LEVEL_12_1 and D3D_FEATURE_LEVEL_12_0. 
@@ -84,6 +84,8 @@ Axiom::D3D11Device::D3D11Device()
 		device.As(m_device);
 		deviceContext.As(m_deviceContext);
 	}
+
+	dxgiFactory->Release();
 }
 
 Axiom::D3D11Device::~D3D11Device()

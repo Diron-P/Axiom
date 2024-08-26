@@ -1,6 +1,7 @@
 export module D3D11GDI;
 
 export import :D3D11Device;
+export import :D3D11SwapChain;
 
 export namespace Axiom
 {
@@ -29,8 +30,8 @@ export namespace Axiom
 
 	private:
 		D3D11Device m_device;
-		/*D3D11SwapChain m_swapChain;
-		ID3D11RenderTargetView* m_rtv;
+		D3D11SwapChain m_swapChain;
+		/*ID3D11RenderTargetView* m_rtv;
 		ID3D11Texture2D* m_depthStencilBuffer;
 		ID3D11DepthStencilState* m_depthStencilState;
 		ID3D11DepthStencilView* m_dsv;

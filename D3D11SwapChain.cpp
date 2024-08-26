@@ -1,18 +1,24 @@
-#include "D3D11SwapChain.h"
-#include "WindowsWindow.h"
+module;
+
+#include <d3d11_4.h>
+
+module D3D11GDI:D3D11SwapChain;
+import :D3D11SwapChain;
+
+#define SAFE_RELEASE(p) if (p != nullptr) { p->Release(); }
 
 Axiom::D3D11SwapChain::D3D11SwapChain(D3D11Device* device, const WindowsWindow* window)
 	: m_device{ device }
 	, m_swapChain{ nullptr }
 {
 	IDXGIDevice4* dxgiDevice;
-	HRESULT hr = device->GetDevice()->QueryInterface(IID_PPV_ARGS(&dxgiDevice));
+	HRESULT hr = device->m_device->QueryInterface(__uuidof(IDXGIDevice4), reinterpret_cast<void**>(&dxgiDevice));
 
 	IDXGIAdapter* dxgiAdapter;
 	hr = dxgiDevice->GetAdapter(&dxgiAdapter);
 
 	IDXGIFactory2* dxgiFactory;
-	hr = dxgiAdapter->GetParent(IID_PPV_ARGS(&dxgiFactory));
+	hr = dxgiAdapter->GetParent(__uuidof(IDXGIDevice4), reinterpret_cast<void**>(&dxgiFactory));
 
 	DXGI_SWAP_CHAIN_DESC1 desc = {};
 	desc.Width = window->GetWidth();
@@ -41,17 +47,19 @@ Axiom::D3D11SwapChain::D3D11SwapChain(D3D11Device* device, const WindowsWindow* 
 	desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 
 	IDXGISwapChain1* swapChain;
-	hr = dxgiFactory->CreateSwapChainForHwnd(device->GetDevice(), window->GetHwnd(), &desc, nullptr, nullptr, &swapChain);
+	hr = dxgiFactory->CreateSwapChainForHwnd(device->m_device.Get(), window->GetHwnd(), &desc, nullptr, nullptr, &swapChain);
 
 	if (SUCCEEDED(hr))
 	{
 		swapChain->QueryInterface(IID_PPV_ARGS(&m_swapChain));
 	}
 
-	swapChain->Release();
-	dxgiFactory->Release();
-	dxgiAdapter->Release();
-	dxgiDevice->Release();
+	// TODO - Need to analyze the performance cost of smart ptrs
+
+	SAFE_RELEASE(swapChain);
+	SAFE_RELEASE(dxgiFactory);
+	SAFE_RELEASE(dxgiAdapter);
+	SAFE_RELEASE(dxgiDevice);
 }
 
 Axiom::D3D11SwapChain::~D3D11SwapChain()

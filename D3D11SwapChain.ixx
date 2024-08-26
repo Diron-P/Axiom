@@ -1,7 +1,9 @@
-#ifndef D3D11_SWAP_CHAIN_H
-#define D3D11_SWAP_CHAIN_H
+module;
 
-#include "D3D11Device.h"
+#include <d3d11_4.h>
+
+export module D3D11GDI:D3D11SwapChain;
+import :D3D11Device;
 
 namespace Axiom
 {
@@ -26,5 +28,3 @@ namespace Axiom
 		IDXGISwapChain4* m_swapChain;
 	};
 }
-
-#endif // !D3D11_SWAP_CHAIN_H
