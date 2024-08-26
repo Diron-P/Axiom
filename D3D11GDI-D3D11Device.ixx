@@ -7,7 +7,7 @@ export module D3D11GDI:D3D11Device;
 
 namespace Axiom
 {
-	class D3D11Device
+	export class D3D11Device
 	{
 	public:
 		D3D11Device();
@@ -21,6 +21,8 @@ namespace Axiom
 
 		/*ID3D11Device4* GetDevice() const { return m_device; };
 		ID3D11DeviceContext4* GetDeviceContext() const { return m_deviceContext; };*/
+
+		void CheckFeatureSupport();
 
 		RefCountPtr<ID3D11Device4> m_device;
 		RefCountPtr<ID3D11DeviceContext4> m_deviceContext;

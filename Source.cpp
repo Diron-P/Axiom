@@ -36,6 +36,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	
 	Axiom::D3D11Device device;
+
 	
 	return 0;
 }

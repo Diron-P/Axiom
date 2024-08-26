@@ -9,11 +9,11 @@ module D3D11GDI:D3D11Device;
 
 Axiom::D3D11Device::D3D11Device()
 {
-	unsigned int dxgiFlags = 0;
+	//unsigned int dxgiFlags = 0;
 	D3D11_CREATE_DEVICE_FLAG deviceFlags;
 
 #ifdef _DEBUG
-	dxgiFlags = DXGI_CREATE_FACTORY_DEBUG;
+	//dxgiFlags = DXGI_CREATE_FACTORY_DEBUG;
 	deviceFlags = D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
@@ -36,6 +36,9 @@ Axiom::D3D11Device::D3D11Device()
 	};
 
 	RefCountPtr<IDXGIAdapter1> adapter;
+	D3D_FEATURE_LEVEL highestSupportedLevel = D3D_FEATURE_LEVEL_9_1;
+	int adapterIndex = 0;
+
     for (unsigned int i = 0; dxgiFactory->EnumAdapters1(i, &adapter) != DXGI_ERROR_NOT_FOUND; ++i)
     {
         DXGI_ADAPTER_DESC1 desc;
@@ -60,15 +63,17 @@ Axiom::D3D11Device::D3D11Device()
             hr = D3D11CreateDevice(adapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0, featureLevels + 1, (sizeof(featureLevels) / sizeof(D3D_FEATURE_LEVEL)) - 1, D3D11_SDK_VERSION, nullptr, &supportedLevel, nullptr);
         }
 
-		if(SUCCEEDED(hr))
+		if (supportedLevel > highestSupportedLevel)
 		{
-			// Succeded
-			break;
+			highestSupportedLevel = supportedLevel;
+			adapterIndex = i;
 		}
     }	
 
 	RefCountPtr<ID3D11Device> device;
 	RefCountPtr<ID3D11DeviceContext> deviceContext;
+
+	dxgiFactory->EnumAdapters1(adapterIndex, &adapter);
 
 	// Create the device and the immediate context.
 	hr = D3D11CreateDevice(adapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, deviceFlags, featureLevels,

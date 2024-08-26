@@ -101,7 +101,7 @@ template<class T>
 template<typename U>
 inline void RefCountPtr<T>::As(RefCountPtr<U>& other) const
 {
-	m_ptr->QueryInterface(__uuidof(U), reinterpret_cast<void**>(other.ReleaseAndGetAddressOf()));
+	HRESULT hr = m_ptr->QueryInterface(__uuidof(U), reinterpret_cast<void**>(other.ReleaseAndGetAddressOf()));
 }
 
 template<class T>
