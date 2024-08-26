@@ -24,55 +24,28 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D3D11Device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WindowsWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BaseWin32Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D3D11SwapChain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TestApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D3D11GHI.cpp">
+    <ClCompile Include="D3D11GDI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileSystem.cpp">
+    <ClCompile Include="Test.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D3D11ShaderProgram.cpp">
+    <ClCompile Include="D3D11GDI.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D3D11Buffer.cpp">
+    <ClCompile Include="D3D11GDI-D3D11Device.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D3D11Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelImporter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DDSReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RendererCommon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WICTextureLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Logger.cpp">
+    <ClCompile Include="D3D11GDI-D3D11Device.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,19 +56,7 @@
     <ClInclude Include="BaseWin32Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D3D11Device.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="D3D11SwapChain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TestApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="D3D11GHI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FileSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Math\Matrix4.h">
@@ -125,52 +86,10 @@
     <ClInclude Include="Math\MathFunctions.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="D3D11ShaderProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="D3D11Buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Math\Matrix2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D3D11Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelImporter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RendererCommon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DDSReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RefCountPtr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Platform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleLogHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="D3DAdapter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -130,6 +130,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>E:\Dev\Axiom\Libs\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ExceptionHandling>false</ExceptionHandling>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,37 +143,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseWin32Application.cpp" />
-    <ClCompile Include="D3D11Buffer.cpp" />
-    <ClCompile Include="D3D11Device.cpp" />
-    <ClCompile Include="D3D11GHI.cpp" />
-    <ClCompile Include="D3D11ShaderProgram.cpp" />
-    <ClCompile Include="D3D11SwapChain.cpp" />
-    <ClCompile Include="D3D11Texture.cpp" />
-    <ClCompile Include="DDSReader.cpp" />
-    <ClCompile Include="FileSystem.cpp" />
-    <ClCompile Include="Logger.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="ModelImporter.cpp" />
-    <ClCompile Include="RendererCommon.cpp" />
+    <ClCompile Include="D3D11GDI-D3D11Device.cpp" />
+    <ClCompile Include="D3D11GDI.cpp" />
+    <ClCompile Include="D3D11GDI-D3D11Device.ixx" />
+    <ClCompile Include="D3D11GDI.ixx" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Test.ixx" />
     <ClCompile Include="TestApp.cpp" />
-    <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WindowsWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWin32Application.h" />
-    <ClInclude Include="ConsoleLogHandler.h" />
-    <ClInclude Include="D3D11Buffer.h" />
-    <ClInclude Include="D3D11Device.h" />
-    <ClInclude Include="D3D11GHI.h" />
-    <ClInclude Include="D3D11ShaderProgram.h" />
-    <ClInclude Include="D3D11SwapChain.h" />
-    <ClInclude Include="D3D11Texture.h" />
-    <ClInclude Include="D3DAdapter.h" />
-    <ClInclude Include="DDSReader.h" />
-    <ClInclude Include="FileSystem.h" />
-    <ClInclude Include="Logger.h" />
     <ClInclude Include="Math\Matrix2.h" />
     <ClInclude Include="Math\Matrix3.h" />
     <ClInclude Include="Math\MathFunctions.h" />
@@ -180,18 +161,11 @@
     <ClInclude Include="Math\Matrix4.h" />
     <ClInclude Include="Math\MatrixClipSpace.h" />
     <ClInclude Include="Math\MatrixTransform.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="ModelImporter.h" />
-    <ClInclude Include="Platform.h" />
     <ClInclude Include="RefCountPtr.h" />
-    <ClInclude Include="RendererCommon.h" />
     <ClInclude Include="TestApp.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Math\Vector4.h" />
-    <ClInclude Include="ImageUtils.h" />
-    <ClInclude Include="Vector.h" />
     <ClInclude Include="WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>

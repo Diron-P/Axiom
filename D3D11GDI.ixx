@@ -1,14 +1,10 @@
-#ifndef D3D11_GDI_H
-#define D3D11_GDI_H
+export module D3D11GDI;
 
-#include <vector>
+export import :D3D11Device;
 
-#include "D3D11Device.h"
-#include "D3D11SwapChain.h"
-
-namespace Axiom
+export namespace Axiom
 {
-	class D3D11Buffer;
+	//class D3D11Buffer;
 
 	enum class BufferType
 	{
@@ -18,10 +14,10 @@ namespace Axiom
 		StructuredBuffer
 	};
 
-	class D3D11GHI
+	class D3D11GDI
 	{
 	public:
-		D3D11GHI(const WindowsWindow* window);
+		D3D11GDI();
 
 		void Initialize();
 		void Shutdown();
@@ -33,13 +29,11 @@ namespace Axiom
 
 	private:
 		D3D11Device m_device;
-		D3D11SwapChain m_swapChain;
+		/*D3D11SwapChain m_swapChain;
 		ID3D11RenderTargetView* m_rtv;
 		ID3D11Texture2D* m_depthStencilBuffer;
 		ID3D11DepthStencilState* m_depthStencilState;
 		ID3D11DepthStencilView* m_dsv;
-		std::vector<D3D11Buffer*>m_buffers;
+		std::vector<D3D11Buffer*>m_buffers;*/
 	};
 }
-
-#endif // !D3D11_GDI_H

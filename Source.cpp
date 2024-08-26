@@ -1,18 +1,16 @@
-#ifndef SOURCE_H
-#define SOURCE_H
+import D3D11GDI;
 
-#include <vector>
-#include "TestApp.h"
+//#include <vector>
+//#include "TestApp.h"
 //#include "Model.h"
 //#include "ModelImporter.h"
 //#include "DDSReader.h"
 //#include "ImageUtils.h"
 //#include "Logger.h"
 
-#include "D3D11Device.h"
+#include <windows.h>
 
-using namespace Axiom;
-using namespace std;
+//using namespace Axiom;
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
@@ -36,9 +34,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
 	//Axiom::LoadTextureFromFilename(L"E:\\Dev\\Axiom\\1353436.png");
 
-	D3D11Device device;
+	
+	Axiom::D3D11Device device;
 	
 	return 0;
 }
-
-#endif

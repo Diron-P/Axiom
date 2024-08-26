@@ -1,6 +1,11 @@
-#include "D3D11Device.h"
+module;	// Beginning of the global module fragment
+
+// This is the global module fragment where you can use preprocessor directives such as #include.
+
+#include <d3d11_4.h>
 #include "RefCountPtr.h"
-#include <wrl/client.h>
+
+module D3D11GDI:D3D11Device;
 
 Axiom::D3D11Device::D3D11Device()
 {
@@ -69,24 +74,17 @@ Axiom::D3D11Device::D3D11Device()
 	hr = D3D11CreateDevice(adapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, deviceFlags, featureLevels,
 		sizeof(featureLevels) / sizeof(D3D_FEATURE_LEVEL), D3D11_SDK_VERSION, &device, nullptr, &deviceContext);
 
-	RefCountPtr<ID3D11Device4> device4;
-	RefCountPtr<ID3D11DeviceContext4> deviceCtx4;	
-
 	if (SUCCEEDED(hr))
 	{
-		device.As(device4);
-		deviceContext.As(deviceCtx4);
-		/*device->QueryInterface(IID_PPV_ARGS(&m_device));
-		deviceContext->QueryInterface(IID_PPV_ARGS(&m_deviceContext));*/
-
-		/*m_deviceContext->Release();
-		m_device->Release();*/
+		device.As(m_device);
+		deviceContext.As(m_deviceContext);
 	}
 }
 
 Axiom::D3D11Device::~D3D11Device()
 {
-	if (m_device != nullptr)
+	// RefCountPtr will handle the resource deallocation of m_device and m_deviceContext
+	/*if (m_device != nullptr)
 	{
 		m_device->Release();
 		m_device = nullptr;
@@ -96,5 +94,5 @@ Axiom::D3D11Device::~D3D11Device()
 	{
 		m_deviceContext->Release();
 		m_deviceContext = nullptr;
-	}
+	}*/
 }
